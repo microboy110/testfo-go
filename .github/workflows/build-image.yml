@@ -1,0 +1,20 @@
+name: 手动构建镜像
+
+# 允许手动触发
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 设置 Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: 构建镜像 (仅测试)
+        run: |
+          docker build -t testfo-go:latest .
+          echo "镜像构建成功！"
